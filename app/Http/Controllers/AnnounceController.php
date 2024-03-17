@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Announce;
 use Illuminate\Http\Request;
+use App\Http\Requests\AddAnnouncementRequest;
 
 class AnnounceController extends Controller
 {
-    public function store(Request $request) {
+    public function store(AddAnnouncementRequest $request) {
         $announce = new Announce();
         $imagePaths = [];
 

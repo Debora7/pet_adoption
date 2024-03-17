@@ -17,18 +17,24 @@
                     <div class="modal-body">
                         <label for="animal" class="form-label">What pet it is?</label>
                         <div class="input-group mb-3">
-                            <input class="form-control" type="text" id="animal" name="animal" required v-model="animal">
+                            <input class="form-control" type="text" id="animal" name="animal" v-model="animal">
                         </div>
+                        <p v-if="errors.animal" class="text-danger">{{ errors.animal[0] }}</p>
+                        <br>
 
                         <label for="image" class="form-label">Upload image(s)</label>
                         <div class="input-group mb-3">
-                            <input class="form-control" ref="images" type="file" id="images" name="files[]" multiple required>
+                            <input class="form-control" ref="images" type="file" id="images" name="files[]" multiple>
                         </div>
+                        <p v-if="errors.image" class="text-danger">{{ errors.image[0] }}</p>
+                        <br>
 
                         <label for="price" class="form-label">What price it is?</label>
                         <div class="input-group mb-3">
-                            <input class="form-control" type="number" id="price" name="price" required v-model="price">
+                            <input class="form-control" type="number" id="price" name="price" v-model="price">
                         </div>
+                        <p v-if="errors.price" class="text-danger">{{ errors.price[0] }}</p>
+                        <br>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Add</button>
@@ -50,6 +56,7 @@
                 animal: '',
                 successMessage: '',
                 errorMessage: '',
+                errors: {},
             };
         },
         methods: {
@@ -75,6 +82,7 @@
                     .catch(error => {
                         if (error.response && error.response.data && error.response.data.message) {
                             this.errorMessage = error.response.data.message;
+                            this.errors = error.response.data.errors;
                         } else {
                             this.errorMessage = 'An error occurred. Please try again later.';
                         }
