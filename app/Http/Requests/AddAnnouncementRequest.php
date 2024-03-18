@@ -25,7 +25,7 @@ class AddAnnouncementRequest extends FormRequest
             'animal' => 'required|string',
             'image' => 'required|array',
             'image.*' => 'required|mimes:jpeg,png,jpg',
-            'price' => 'required|numeric',
+            'phone_number' => 'required',
         ];
     }
 }

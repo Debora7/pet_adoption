@@ -22,6 +22,7 @@ class AnnounceController extends Controller
         $announce->animal = $request->animal;
         $announce->image_path = json_encode($imagePaths);
         $announce->price = $request->price;
+        $announce->phone_number = $request->phone_number;
 
         if($announce->save()) {
             return response()->json([
