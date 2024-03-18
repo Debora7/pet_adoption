@@ -33,7 +33,12 @@
                         <div class="input-group mb-3">
                             <input class="form-control" type="number" id="price" name="price" v-model="price">
                         </div>
-                        <p v-if="errors.price" class="text-danger">{{ errors.price[0] }}</p>
+
+                        <label for="phone_number" class="form-label">Phone number:</label>
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="tel" id="phone_number" name="phone_number" v-model="phone_number">
+                        </div>
+                        <p v-if="errors.phone_number" class="text-danger">{{ errors.phone_number[0] }}</p>
                         <br>
                     </div>
                     <div class="modal-footer">
@@ -54,6 +59,7 @@
             return {
                 price: '',
                 animal: '',
+                phone_number: '',
                 successMessage: '',
                 errorMessage: '',
                 errors: {},
@@ -69,6 +75,7 @@
                     formData.append('image[]', filesInput[i]);
                 }
                 formData.append('price', this.price);
+                formData.append('phone_number', this.phone_number);
 
                 axios.post('/add-announce', formData)
                     .then(response => {
