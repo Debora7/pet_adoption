@@ -49,6 +49,8 @@
             </div>
         </div>
     </div>
+
+    <show-announcements></show-announcements>
 </template>
 
 <script>
