@@ -26,12 +26,12 @@ class AnnounceController extends Controller
 
         if($announce->save()) {
             return response()->json([
-                'message' => 'Announce saved successfully'
+                'message' => __('success.success'),
             ], 200);
         }
 
         return response()->json([
-            'message' => 'Error'
+            'message' => __('error.error'),
         ], 500);
     }
 }
