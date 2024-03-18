@@ -25,7 +25,7 @@ class AddAnnouncementRequest extends FormRequest
             'animal' => 'required|string',
             'image' => 'required|array',
             'image.*' => 'required|mimes:jpeg,png,jpg',
-            'phone_number' => 'required',
+            'phone_number' => ['required', 'regex:/^(?:(?:\+|00)40)?(?:\(0\))?[0-9]{9}$/'],
         ];
     }
 }
