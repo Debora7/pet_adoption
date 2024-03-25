@@ -1,9 +1,11 @@
 import './bootstrap';
 import { createApp } from 'vue';
+import AddAnnounceButton from './components/AddAnnounceButton.vue';
+import ShowAnnouncements from './components/ShowAnnouncements.vue';
 
 const app = createApp({});
 
-import AddAnnounceButton from './components/AddAnnounceButton.vue';
 app.component('add-announce-button', AddAnnounceButton);
+app.component('show-announcements', ShowAnnouncements);
 
 app.mount('#app');

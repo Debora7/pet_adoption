@@ -15,14 +15,14 @@
                 </div>
                 <form @submit.prevent="submitForm">
                     <div class="modal-body">
-                        <label for="animal" class="form-label">What pet it is?</label>
+                        <label for="animal" class="form-label">What pet it is?<sup style="color: red;">*</sup></label>
                         <div class="input-group mb-3">
                             <input class="form-control" type="text" id="animal" name="animal" v-model="animal">
                         </div>
                         <p v-if="errors.animal" class="text-danger">{{ errors.animal[0] }}</p>
                         <br>
 
-                        <label for="image" class="form-label">Upload image(s)</label>
+                        <label for="image" class="form-label">Upload image(s)<sup style="color: red;">*</sup></label>
                         <div class="input-group mb-3">
                             <input class="form-control" ref="images" type="file" id="images" name="files[]" multiple>
                         </div>
@@ -34,7 +34,7 @@
                             <input class="form-control" type="number" id="price" name="price" v-model="price">
                         </div>
 
-                        <label for="phone_number" class="form-label">Phone number:</label>
+                        <label for="phone_number" class="form-label">Phone number:<sup style="color: red;">*</sup></label>
                         <div class="input-group mb-3">
                             <input class="form-control" type="tel" id="phone_number" name="phone_number" v-model="phone_number">
                         </div>
@@ -49,54 +49,14 @@
             </div>
         </div>
     </div>
+
+    <show-announcements></show-announcements>
 </template>
 
 <script>
-    import axios from 'axios';
+    import add_announce_button from '../add_announce_button.js';
 
     export default {
-        data() {
-            return {
-                price: '',
-                animal: '',
-                phone_number: '',
-                successMessage: '',
-                errorMessage: '',
-                errors: {},
-            };
-        },
-        methods: {
-            submitForm() {
-                const formData = new FormData();
-
-                formData.append('animal', this.animal);
-                const filesInput = this.$refs.images.files;
-                for (let i = 0; i < filesInput.length; i++) {
-                    formData.append('image[]', filesInput[i]);
-                }
-                formData.append('price', this.price);
-                formData.append('phone_number', this.phone_number);
-
-                axios.post('/add-announce', formData)
-                    .then(response => {
-                        this.successMessage = response.data.message;
-
-                        this.$emit('submitSuccess');
-
-                        const modal = new bootstrap.Modal(this.$refs.modal);
-                        modal.hide();
-                    })
-                    .catch(error => {
-                        if (error.response && error.response.data && error.response.data.message) {
-                            this.errorMessage = error.response.data.message;
-                            this.errors = error.response.data.errors;
-                        } else {
-                            this.errorMessage = 'An error occurred. Please try again later.';
-                        }
-
-                        this.$emit('submitError');
-                    });
-            }
-        }
+        ...add_announce_button
     }
 </script>

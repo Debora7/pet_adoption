@@ -34,4 +34,25 @@ class AnnounceController extends Controller
             'message' => __('error.error'),
         ], 500);
     }
+
+    public function index() {
+        $announcements = Announce::all();
+
+        if($announcements->isNotEmpty()) {
+            $announcements->transform(function ($announcement) {
+                $images = json_decode($announcement->image_path, true);
+                $announcement->images = $images ?? [];
+                return $announcement;
+            });
+    
+            return response()->json([
+                'message' => __('success.success'),
+                'announcements' => $announcements,
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => __('error.error'),
+        ], 404);
+    }
 }
