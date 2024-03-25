@@ -39,6 +39,12 @@ class AnnounceController extends Controller
         $announcements = Announce::all();
 
         if($announcements->isNotEmpty()) {
+            $announcements->transform(function ($announcement) {
+                $images = json_decode($announcement->image_path, true);
+                $announcement->images = $images ?? [];
+                return $announcement;
+            });
+    
             return response()->json([
                 'message' => __('success.success'),
                 'announcements' => $announcements,

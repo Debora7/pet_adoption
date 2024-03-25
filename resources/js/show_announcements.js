@@ -19,7 +19,6 @@ export default {
                     this.announcements.forEach(announcement => {
                         announcement.image_path = JSON.parse(announcement.image_path)[0];
                     });
-                    console.log(this.announcements);
                 })
                 .catch(error => {
                     if (error.response && error.response.data && error.response.data.message) {
