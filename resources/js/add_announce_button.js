@@ -5,6 +5,9 @@ import axios from 'axios';
             return {
                 price: '',
                 animal: '',
+                tag: '',
+                tags: [],
+                description: '',
                 phone_number: '',
                 successMessage: '',
                 errorMessage: '',
@@ -12,6 +15,15 @@ import axios from 'axios';
             };
         },
         methods: {
+            getTags() {
+                axios.get('/get-tags')
+                .then(response => {
+                    this.tags = response.data.tags;
+                })
+                .catch(error => {
+                    this.$emit('submitError');
+                });
+            },
             submitForm() {
                 const formData = new FormData();
 
@@ -22,6 +34,8 @@ import axios from 'axios';
                 }
                 formData.append('price', this.price);
                 formData.append('phone_number', this.phone_number);
+                formData.append('tag', this.tag);
+                formData.append('description', this.description);
 
                 axios.post('/add-announce', formData)
                     .then(response => {

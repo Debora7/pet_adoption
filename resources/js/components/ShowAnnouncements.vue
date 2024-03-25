@@ -1,7 +1,7 @@
 <template>
     <div class="row mt-4">
         <div class="col-md-4 mb-4" v-for="announcement in announcements" :key="announcement.id">
-            <div class="card" style="width: 18rem; height: 450px;">
+            <div class="card" style="width: 18rem; height: 100%;">
 
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -21,8 +21,12 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ announcement.animal }}</h5>
-                    <p class="card-text fw-light">{{ announcement.phone_number }}</p>
-                    <p class="card-text" v-if="announcement.price">{{ announcement.price }} Lei</p>
+                    <p class="badge bg-success p-2">{{ announcement.phone_number }}</p>
+                    <p class="lead" v-if="announcement.description">{{ announcement.description }}</p>
+                    <p class="card-text" v-if="announcement.price">
+                        <span class="badge bg-primary p-2 me-2">Price: </span>
+                        <span class="text-primary">{{ announcement.price }} Lei</span>
+                    </p>
                 </div>
             </div>
         </div>
