@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::post('/add-announce', [AnnounceController::class, 'store'])->name('add-announce');
 Route::get('/show-announcements', [AnnounceController::class, 'index'])->name('show-announcements');
+Route::get('/get-tags', [AnnounceController::class, 'getTags'])->name('get-tags');

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#add-announcement-modal">Add announcement</button>
+            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#add-announcement-modal" @click="getTags">Add announcement</button>
         </div>
     </div>
 
@@ -40,6 +40,20 @@
                         </div>
                         <p v-if="errors.phone_number" class="text-danger">{{ errors.phone_number[0] }}</p>
                         <br>
+
+                        <label for="tag" class="form-label">Tag:<sup style="color: red;">*</sup></label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" v-model="tag">
+                                <option v-for="tag in tags">{{ tag }}</option>
+                            </select>
+                        </div>
+                        <p v-if="errors.tasg" class="text-danger">{{ errors.tag[0] }}</p>
+                        <br>
+
+                        <label for="description" class="form-label">Description: </label>
+                        <div class="input-group mb-3">
+                            <textarea class="form-control" id="description" v-model="description"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Add</button>

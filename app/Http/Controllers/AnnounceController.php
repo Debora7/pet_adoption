@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announce;
 use Illuminate\Http\Request;
+use App\Enums\TagOptionsEnum;
 use App\Http\Requests\AddAnnouncementRequest;
 
 class AnnounceController extends Controller
@@ -23,6 +24,8 @@ class AnnounceController extends Controller
         $announce->image_path = json_encode($imagePaths);
         $announce->price = $request->price;
         $announce->phone_number = $request->phone_number;
+        $announce->tag = $request->tag;
+        $announce->description = $request->description;
 
         if($announce->save()) {
             return response()->json([
@@ -54,5 +57,13 @@ class AnnounceController extends Controller
         return response()->json([
             'message' => __('error.error'),
         ], 404);
+    }
+
+    public function getTags() {
+        $tags = TagOptionsEnum::getValues();
+
+        return response()->json([
+            'tags' => $tags,
+        ], 200);
     }
 }
